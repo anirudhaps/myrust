@@ -10,4 +10,8 @@ fn main() {
 
   // special formatting using a ':', :b prints binary representation
   println!("{} of {:b} people know binary, the other half does not", 1, 2);
+
+  // rust will check if correct number of arguments are used
+  // the following will generate compiler error: invalid reference to positional argument 1 (there is 1 argument)
+  // println!("My name is {0}, {1} {0}", "Anirudh");
 }
