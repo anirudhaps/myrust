@@ -1,3 +1,7 @@
+trait Stringify {
+    fn to_string(&self) -> String;
+}
+
 enum Subject {
     Math,
     Physics,
@@ -15,22 +19,26 @@ enum Subject {
     Civics,
 }
 
-fn subject_to_string(sub: &Subject) -> String {
-    match sub {
-        Subject::Math => "Mathematics".to_string(),
-        Subject::Physics => "Physics".to_string(),
-        Subject::Chemistry => "Chemistry".to_string(),
-        Subject::Biology => "Biology".to_string(),
-        Subject::History => "History".to_string(),
-        Subject::Geography => "Geography".to_string(),
-        Subject::Literature => "Literature".to_string(),
-        Subject::Philosophy => "Philosophy".to_string(),
-        Subject::Music => "Music".to_string(),
-        Subject::Art => "Art".to_string(),
-        Subject::PhysicalEducation => "Physical Education".to_string(),
-        Subject::ForeignLanguage => "Foreign Language".to_string(),
-        Subject::ComputerScience => "Computer Science".to_string(),
-        Subject::Civics => "Civics".to_string(),
+/* Enums can also implement traits (similar to structs) */
+impl Stringify for Subject {
+    fn to_string(&self) -> String {
+        use Subject::*;
+        match self {
+            Math => "Mathematics".to_string(),
+            Physics => "Physics".to_string(),
+            Chemistry => "Chemistry".to_string(),
+            Biology => "Biology".to_string(),
+            History => "History".to_string(),
+            Geography => "Geography".to_string(),
+            Literature => "Literature".to_string(),
+            Philosophy => "Philosophy".to_string(),
+            Music => "Music".to_string(),
+            Art => "Art".to_string(),
+            PhysicalEducation => "Physical Education".to_string(),
+            ForeignLanguage => "Foreign Language".to_string(),
+            ComputerScience => "Computer Science".to_string(),
+            Civics => "Civics".to_string(),
+        }
     }
 }
 
@@ -41,12 +49,15 @@ enum Field {
     MaterialScience,
 }
 
-fn field_to_string(field: &Field) -> String {
-    match field {
-        Field::Biology => "Biology".to_string(),
-        Field::Chemistry => "Chemistry".to_string(),
-        Field::Physics => "Physics".to_string(),
-        Field::MaterialScience => "Material Science".to_string(),
+impl Stringify for Field {
+    fn to_string(&self) -> String {
+        use Field::*;
+        match self {
+            Biology => "Biology".to_string(),
+            Chemistry => "Chemistry".to_string(),
+            Physics => "Physics".to_string(),
+            MaterialScience => "Material Science".to_string(),
+        }
     }
 }
 
@@ -55,10 +66,12 @@ enum House {
     RajyaSabha,
 }
 
-fn house_to_string(house: &House) -> String {
-    match house {
-        House::LokSabha => "Lok Sabha".to_string(),
-        House::RajyaSabha => "Rajya Sabha".to_string(),
+impl Stringify for House {
+    fn to_string(&self) -> String {
+        match self {
+            House::LokSabha => "Lok Sabha".to_string(),
+            House::RajyaSabha => "Rajya Sabha".to_string(),
+        }
     }
 }
 
@@ -88,31 +101,34 @@ enum Constituency {
     Minority,
 }
 
-fn constituency_to_string(constituency: &Constituency) -> String {
-    match constituency {
-        Constituency::North => "North".to_string(),
-        Constituency::South => "South".to_string(),
-        Constituency::East => "East".to_string(),
-        Constituency::West => "West".to_string(),
-        Constituency::Central => "Central".to_string(),
-        Constituency::Suburban => "Suburban".to_string(),
-        Constituency::Rural => "Rural".to_string(),
-        Constituency::Urban => "Urban".to_string(),
-        Constituency::Metropolitan => "Metropolitan".to_string(),
-        Constituency::Industrial => "Industrial".to_string(),
-        Constituency::Agricultural => "Agricultural".to_string(),
-        Constituency::Coastal => "Coastal".to_string(),
-        Constituency::Hilly => "Hilly".to_string(),
-        Constituency::Desert => "Desert".to_string(),
-        Constituency::Island => "Island".to_string(),
-        Constituency::Border => "Border".to_string(),
-        Constituency::Tribal => "Tribal".to_string(),
-        Constituency::Reserved => "Reserved".to_string(),
-        Constituency::Unreserved => "Unreserved".to_string(),
-        Constituency::General => "General".to_string(),
-        Constituency::Scheduled => "Scheduled".to_string(),
-        Constituency::Backward => "Backward".to_string(),
-        Constituency::Minority => "Minority".to_string(),
+impl Stringify for Constituency {
+    fn to_string(&self) -> String {
+        use Constituency::*;
+        match self {
+            North => "North".to_string(),
+            South => "South".to_string(),
+            East => "East".to_string(),
+            West => "West".to_string(),
+            Central => "Central".to_string(),
+            Suburban => "Suburban".to_string(),
+            Rural => "Rural".to_string(),
+            Urban => "Urban".to_string(),
+            Metropolitan => "Metropolitan".to_string(),
+            Industrial => "Industrial".to_string(),
+            Agricultural => "Agricultural".to_string(),
+            Coastal => "Coastal".to_string(),
+            Hilly => "Hilly".to_string(),
+            Desert => "Desert".to_string(),
+            Island => "Island".to_string(),
+            Border => "Border".to_string(),
+            Tribal => "Tribal".to_string(),
+            Reserved => "Reserved".to_string(),
+            Unreserved => "Unreserved".to_string(),
+            General => "General".to_string(),
+            Scheduled => "Scheduled".to_string(),
+            Backward => "Backward".to_string(),
+            Minority => "Minority".to_string(),
+        }
     }
 }
 
@@ -160,20 +176,20 @@ impl Person {
                 "{} aged {} is a teacher of subject {}",
                 self.name,
                 self.age,
-                subject_to_string(sub)
+                sub.to_string()
             ),
             Job::Scientist(field) => println!(
                 "{} aged {} is a scientist in field {}",
                 self.name,
                 self.age,
-                field_to_string(field)
+                field.to_string()
             ),
             Job::MemberOfParliament(house, constituency) => println!(
                 "{} aged {} is a member of parliament in the {} representing the constituency of {}",
                 self.name,
                 self.age,
-                house_to_string(house),
-                constituency_to_string(constituency)
+                house.to_string(),
+                constituency.to_string()
             ),
         }
     }
