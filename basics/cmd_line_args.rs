@@ -3,7 +3,8 @@ use std::env;
 fn main() {
     let args: Vec<String> = env::args().collect();
     println!("Args: {:?}", args);
-    // if & is not used, args will be moved and cannot be used again
+    // if & is not used, args will be moved and cannot be used again.
+    // Or use args.iter() that returns immutable &args.
     for a in &args {
         println!("{}", a);
     }
