@@ -2,6 +2,13 @@ use std::env;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
+    if args.len() < 4 {
+        println!(
+            "Usage: ./cmd_line_args <first_arg> <second_arg> <third numeric arg> [<more args>..]"
+        );
+        return;
+    }
+    // {:?} or {var_name:?} is used for debug printing
     println!("Args: {:?}", args);
     // if & is not used, args will be moved and cannot be used again.
     // Or use args.iter() that returns immutable &args.
@@ -16,7 +23,7 @@ fn main() {
     // convert string to number
     let num: u32 = num_arg.parse().unwrap();
     println!("Program name: {}", prog_name);
-    println!("First argument: {}", first_arg);
-    println!("Second argument: {}", sec_arg);
-    println!("Parsed number: {}", num);
+    println!("First argument: {:?}", first_arg);
+    println!("Second argument: {sec_arg:?}");
+    println!("Parsed number: {:?}", num);
 }

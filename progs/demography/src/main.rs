@@ -23,6 +23,14 @@ enum Subject {
 impl Stringify for Subject {
     fn to_string(&self) -> String {
         use Subject::*;
+        // Important point about match expressions:
+        // A match expression must be exhaustive. That is, it should have
+        // all the cases/values of the match expression. Thus, if we add
+        // a new variant for the Subject enum and if we don't add
+        // corresponding match expression below, then the compilor will complain.
+
+        // Always choose match over if-else if we are dealing with only one
+        // variable. 
         match self {
             Math => "Mathematics".to_string(),
             Physics => "Physics".to_string(),
@@ -166,7 +174,7 @@ impl Person {
     fn is_member_of_parliament(&self) -> bool {
         match self.job {
             Job::MemberOfParliament(_, _) => true,
-            _ => false,
+            _ => false, // in a match expression, use _ to match with anything else.
         }
     }
 

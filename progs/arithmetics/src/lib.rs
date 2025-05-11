@@ -39,7 +39,9 @@ f64 is the default type for the floating point numbers/literals.
  */
 
 pub fn compound_types() {
-    // tuple
+    /* tuples are mostly used to return more than one values from a function
+       and then destucture it in the calling function.
+     */
     let info = (1, 3.3, 999);
     println!(
         "first val: {}, second val: {}, third val: {}",
